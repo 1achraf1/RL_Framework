@@ -1,0 +1,22 @@
+from rl_framework.envs.gridworld import GridWorld
+from rl_framework.agents.linear_q import LinearQAgent
+from rl_framework.utils.plotting import plot_policy
+
+env = GridWorld(height=6, width=6, goal=(5,5))
+agent = LinearQAgent(env, alpha=0.05, epsilon=1.0)
+
+agent.learn(num_episodes=1000, max_steps=50, random_start=True)
+
+# Test policy
+env.reset()
+agent.epsilon = 0
+done, steps = False, 0
+while not done and steps < 30:
+    env.render()
+    action = agent.act(env.agent.pos)
+    _, _, done = env.step(action)
+    steps += 1
+
+# Visualize learned weights as Q-grid
+Q = agent.get_q_grid()
+plot_policy(env, Q)
