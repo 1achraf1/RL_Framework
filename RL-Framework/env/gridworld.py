@@ -26,7 +26,7 @@ class Agent:
 
 class GridWorld:
     def __init__(self, height=5, width=5, start=None, goal=None,
-                 reward_goal=1, reward_step=-1, obstacles=None, obstacle_penalty=-100):
+                 reward_goal=10, reward_step=-1, obstacles=None, obstacle_penalty=-10):
         self.height, self.width = height, width
         self.obstacles = set(tuple(o) for o in obstacles) if obstacles else set()
         self.start = tuple(start) if start else self._random_free_cell(exclude=[])
