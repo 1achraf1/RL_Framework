@@ -21,11 +21,4 @@ Includes both **tabular Q-Learning** and **linear function approximation** agent
 
 ---
 
-## Installation
 
-Clone the repo and install locally:
-
-```bash
-git clone https://github.com/yourusername/rl-framework.git
-cd rl-framework
-pip install -e .
