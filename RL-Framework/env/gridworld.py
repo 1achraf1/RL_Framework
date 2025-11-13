@@ -29,7 +29,9 @@ class Agent:
         elif action == 3:  # Left
             return (r, c - 1)
         return (r, c)
+        
 class GridWorld(gym.Env):
+
     metadata = {"render_modes": ["human", "rgb_array"], "render_fps": 10}
 
     def __init__(self, height=5, width=5, start=None, goal=None,
@@ -191,6 +193,10 @@ class GridWorld(gym.Env):
         self.agent.start_pos = self.start
         self._steps = 0
 
+        # Reset transition model cache if it exists
+        if hasattr(self, 'transition_model'):
+            del self.transition_model
+
         observation = self._get_obs()
 
         info = self._get_info()
@@ -251,6 +257,84 @@ class GridWorld(gym.Env):
             self.render()
 
         return observation, reward, terminated, truncated, info
+
+    #these methods are for DP solvers (VI & PI) requiring model of the environement 
+    def get_transition_model(self):
+        """
+        Returns the transition model for use in DP solvers.
+        Call this *after* reset() to ensure obstacles are set.
+        
+        Returns:
+            transitions (dict): {s: {a: [(prob, next_s, reward, done), ...]}, ...}
+        """
+        if hasattr(self, 'transition_model'):
+            return self.transition_model
+ 
+        model = {}
+        for r in range(self.height):
+            for c in range(self.width):
+                s = (r, c)
+                # No transitions *from* terminal states
+                if s in self.obstacles or s in self.goals:
+                    continue
+                
+                model[s] = {}
+                for a in range(self.action_space.n):
+                    model[s][a] = self._get_one_step_lookahead(s, a)
+        
+        self.transition_model = model
+        return model
+
+    def _get_one_step_lookahead(self, state, action):
+        """
+        Calculates the possible outcomes for a single state-action pair.
+        This version is self-contained and does not rely on self.agent.
+        """
+        # Helper to calculate next position
+        def _calculate_move(pos, act):
+            r, c = pos
+            if act == 0:  # Up
+                return (r - 1, c)
+            elif act == 1:  # Right
+                return (r, c + 1)
+            elif act == 2:  # Down
+                return (r + 1, c)
+            elif act == 3:  # Left
+                return (r, c - 1)
+            return (r, c) 
+
+        if self.stochastic:
+            actions = [0, 1, 2, 3]
+            if action == 0: probabilities = [0.8, 0.1, 0, 0.1]
+            elif action == 1: probabilities = [0.1, 0.8, 0.1, 0]
+            elif action == 2: probabilities = [0, 0.1, 0.8, 0.1]
+            else: probabilities = [0.1, 0, 0.1, 0.8]
+        else:
+            probabilities = [0.0] * 4
+            probabilities[action] = 1.0
+
+        outcomes = []
+        for a_idx, prob in enumerate(probabilities):
+            if prob == 0.0:
+                continue
+
+            proposed_pos = _calculate_move(state, a_idx)
+            
+            if (not (0 <= proposed_pos[0] < self.height and 0 <= proposed_pos[1] < self.width)
+                    or proposed_pos in self.obstacles):
+                next_s = state # Stay in place
+                reward = self.obstacle_penalty
+            elif proposed_pos in self.goals:
+                next_s = proposed_pos
+                reward = self.reward_goal
+            else:
+                next_s = proposed_pos
+                reward = self.reward_step
+            
+            done = next_s in self.goals
+            outcomes.append((prob, next_s, reward, done))
+        
+        return outcomes
 
     # VISUALIZATION METHODS 
 
