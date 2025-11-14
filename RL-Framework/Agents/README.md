@@ -19,6 +19,7 @@ Support for decaying exploration
 Training and evaluation modes
 
 **Usage**:
+
 pythonfrom Agents.q_learning.q_learning import QLearningAgent
 
 agent = QLearningAgent(
@@ -33,6 +34,8 @@ agent = QLearningAgent(
 agent.train(num_episodes=1000)
 
 Linear Q-Learning (LinearQLearning/)
+
+
 Q-learning using linear function approximation for state-value estimation.
 Features:
 
@@ -49,6 +52,8 @@ Bridging tabular and deep learning methods
 
 
 Deep Q-Network (dqn/)
+
+
 Deep learning-based Q-learning using neural networks.
 Features:
 
@@ -59,12 +64,14 @@ Handles large/continuous state spaces
 
 Key Components:
 
+
 Replay buffer for breaking correlation
 Separate target network updated periodically
 Adam optimizer for training
 Epsilon-greedy exploration
 
 **Best for**:
+
 
 Complex environments with large state spaces
 Problems requiring non-linear function approximation
@@ -75,12 +82,15 @@ Monte Carlo Methods (monte_carlo/)
 Monte Carlo reinforcement learning algorithms.
 Features:
 
+
+
 First-visit and every-visit MC
 Episode-based learning
 No bootstrapping (full returns)
 On-policy and off-policy variants
 
 **Characteristics**:
+
 
 Requires episodic tasks
 High variance, low bias
@@ -89,6 +99,7 @@ No model required
 
 **Best for**:
 
+
 Episodic environments
 When you want unbiased estimates
 Exploring alternative approaches to temporal difference learning
@@ -96,12 +107,16 @@ Exploring alternative approaches to temporal difference learning
 
 Proximal Policy Optimization (ppo/)
 Modern policy gradient method for both discrete and continuous action spaces.
+
+
 Features:
+
 
 Clipped surrogate objective
 Actor-critic architecture
 Generalized Advantage Estimation (GAE)
 Multiple epochs per batch
+
 
 **Advantages**:
 
@@ -110,7 +125,9 @@ Stable and reliable training
 Works with continuous actions
 Sample efficient
 
+
 **Best for**:
+
 
 Complex control tasks
 When DQN struggles
@@ -150,32 +167,42 @@ Your state/action space is small
 You're learning RL fundamentals
 You want quick results and easy debugging
 
+
 Use Linear Q-Learning if:
+
 
 State space is too large for tabular methods
 You want interpretable features
 Environment has linear structure
 
+
 Choose DQN if:
+
 
 State space is very large
 You have complex state representations
 Tabular methods don't work
 
+
 Try Monte Carlo if:
+
 
 Tasks are episodic
 You want to compare with TD methods
 You need unbiased estimates
 
+
 Go with PPO if:
+
 
 You need state-of-the-art performance
 Working with continuous actions
 Building production systems
 Other methods have failed
 
+
 Training Tips
+
 
 Start simple: Begin with Q-learning to understand the environment
 Tune hyperparameters: Learning rate and exploration are critical
@@ -184,29 +211,38 @@ Use baselines: Compare against random and optimal policies
 Visualize learning: Plot learning curves and policy evolution
 Debug systematically: Verify environment rewards and state representations
 
+
 Common Issues
+
 Agent not learning:
+
 
 Check reward structure
 Verify state representation
 Adjust learning rate
 Increase exploration
 
+
 Unstable training:
+
 
 Reduce learning rate
 Increase replay buffer (DQN)
 Use target networks
 Check for bugs in update logic
 
+
 Slow convergence:
+
 
 Tune exploration parameters
 Check discount factor
 Verify network architecture (DQN/PPO)
 Consider reward shaping
 
+
 References
+
 
 Sutton & Barto - "Reinforcement Learning: An Introduction"
 Mnih et al. - "Playing Atari with Deep Reinforcement Learning" (DQN)
