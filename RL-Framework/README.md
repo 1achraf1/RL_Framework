@@ -18,22 +18,28 @@ This project provides a modular framework for experimenting with reinforcement l
 ```
 RL-Framework/
 ├── Agents/                          # RL agent implementations
-│   ├── LinearQLearning/            # Linear function approximation Q-learning
-│   ├── dqn/                        # Deep Q-Network agent
-│   ├── monte_carlo/                # Monte Carlo methods
-│   ├── ppo/                        # Proximal Policy Optimization
-│   ├── q_learning/                 # Tabular Q-learning
-│   │   ├── linear_q.py            # Linear Q-learning implementation
-│   │   └── q_learning.py          # Standard Q-learning implementation
-├── DynamicProgramming/             # DP algorithms for solving MDPs
-│   ├── PolicyIteration.py         # Policy iteration algorithm
-│   └── ValueIteration.py          # Value iteration algorithm
-├── Notebooks/                      # Jupyter notebooks for experiments
-├── Utils/                          # Utility functions and helpers
-├── env/                            # Custom Grid World environment
-├── stable_baseline3_examples/     # Examples using Stable-Baselines3
-├── README.md                       # This file
-└── __init__.py                    # Package initialization
+│   ├── LinearQLearning/             # Linear function approximation Q-learning
+│   ├── dqn/                         # Deep Q-Network agent
+|   |   ├── DQNAgent.py           
+|   |   └── train.py 
+│   ├── monte_carlo/                 # Monte Carlo methods
+|   |   ├── MCAgent.py
+|   |   └── train.py      
+│   ├── ppo/                         # Policy proximal optimization
+|   |   ├── PPOAgent.py
+|   |   └── train.py
+│   ├── q_learning/                  # Tabular Q-learning
+|   |   ├── Qlearning_Agent.py
+|   |   └── train.py 
+├── DynamicProgramming/              # DP algorithms for solving MDPs
+│   ├── PolicyIteration.py           # Policy iteration algorithm
+│   └── ValueIteration.py            # Value iteration algorithm
+├── Notebooks/                       # Jupyter notebooks for experiments
+├── Utils/                           # Utility functions and helpers
+├── env/                             # Custom Grid World environment
+├── stable_baseline3_examples/       # Examples using Stable-Baselines3
+├── README.md                        # This file
+└── __init__.py                      # Package initialization
 ```
 
 ## Environment
@@ -49,7 +55,7 @@ The Grid World environment is a custom implementation that:
 
 ### Tabular Methods
 - **Q-Learning**: Standard tabular Q-learning with epsilon-greedy exploration
-- **Monte Carlo**: First-visit and every-visit MC methods
+- **Monte Carlo**: First-visit
 - **Dynamic Programming**: Value Iteration and Policy Iteration
 
 ### Function Approximation
