@@ -77,10 +77,10 @@ pip install gymnasium numpy matplotlib
 
 ```python
 import gymnasium as gym
-from env import GridWorldEnv
+from env import GridWorld
 
 # Create environment
-env = GridWorldEnv()
+env = GridWorld()
 
 # Reset environment
 state, info = env.reset()
@@ -92,7 +92,7 @@ next_state, reward, terminated, truncated, info = env.step(action)
 ### Training an Agent
 
 ```python
-from Agents.q_learning.q_learning import QLearningAgent
+from Agents.q_learning import QLearningAgent
 
 # Initialize agent
 agent = QLearningAgent(env)
