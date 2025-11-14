@@ -1,4 +1,4 @@
-Agents
+**Agents**
 This directory contains implementations of various Reinforcement Learning agents, ranging from classical tabular methods to modern deep learning approaches.
 Overview
 All agents are designed to work with the custom Grid World environment and follow consistent interfaces for easy comparison and experimentation.
