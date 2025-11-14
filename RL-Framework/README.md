@@ -1,104 +1,125 @@
-RL-Framework
+# RL-Framework
 
-This repository is a collection of various Reinforcement Learning algorithms implemented from scratch, as well as benchmark implementations using stable-baselines3. All algorithms are tested on a custom Gymnasium-compatible GridWorld environment.
+A comprehensive Reinforcement Learning framework featuring a custom Grid World environment compatible with Gymnasium, along with implementations of classical and modern RL algorithms.
 
-Project Structure
+## Overview
 
-The repository is organized into distinct modules:
+This project provides a modular framework for experimenting with reinforcement learning algorithms in a custom-built Grid World environment. The environment follows the Gymnasium API standards, making it easy to integrate with existing RL workflows and libraries.
 
+## Features
+
+- **Custom Grid World Environment**: Fully-featured grid world compatible with Gymnasium interface
+- **Multiple RL Agents**: Implementations of various classical and deep RL algorithms
+- **Dynamic Programming**: Value and Policy Iteration solvers
+- **Educational Focus**: Clear, well-documented code suitable for learning and experimentation
+
+## Project Structure
+
+```
 RL-Framework/
-├── Agents/               # From-scratch model-free agents (MC, Q-Learning, DQN)
-│   ├── monte_carlo/
-│   ├── q_learning/
-│   └── ...
-│
-├── DP/                   # From-scratch model-based solvers (Dynamic Programming)
-│   ├── value_iteration.py
-│   └── policy_iteration.py
-│
-├── env/                  # The custom GridWorld environment
-│   └── gridworld.py
-│
-├── stable_baseline3_exemples/ # Benchmark agent implementations (PPO, A2C, DQN)
-│   ├── train_a2c.py
-│   ├── train_dqn.py
-│   └── train_ppo.py
-│
-├── Notebooks/            # Jupyter notebooks for experiments and visualization
-├── Utils/                # Helper scripts, plotting functions, etc.
-│
-├── README.md             # You are here
-└── requirements.txt      # Project dependencies
+├── Agents/                          # RL agent implementations
+│   ├── LinearQLearning/            # Linear function approximation Q-learning
+│   ├── dqn/                        # Deep Q-Network agent
+│   ├── monte_carlo/                # Monte Carlo methods
+│   ├── ppo/                        # Proximal Policy Optimization
+│   ├── q_learning/                 # Tabular Q-learning
+│   │   ├── linear_q.py            # Linear Q-learning implementation
+│   │   └── q_learning.py          # Standard Q-learning implementation
+├── DynamicProgramming/             # DP algorithms for solving MDPs
+│   ├── PolicyIteration.py         # Policy iteration algorithm
+│   └── ValueIteration.py          # Value iteration algorithm
+├── Notebooks/                      # Jupyter notebooks for experiments
+├── Utils/                          # Utility functions and helpers
+├── env/                            # Custom Grid World environment
+├── stable_baseline3_examples/     # Examples using Stable-Baselines3
+├── README.md                       # This file
+└── __init__.py                    # Package initialization
+```
 
+## Environment
 
-🚀 Getting Started
+The Grid World environment is a custom implementation that:
+- Follows the Gymnasium API specification
+- Supports configurable grid sizes and obstacle placement
+- Provides customizable reward structures
+- Includes rendering capabilities for visualization
+- Compatible with both tabular and function approximation methods
 
-Follow these steps to get the project up and running on your local machine.
+## Implemented Algorithms
 
-Prerequisites
+### Tabular Methods
+- **Q-Learning**: Standard tabular Q-learning with epsilon-greedy exploration
+- **Monte Carlo**: First-visit and every-visit MC methods
+- **Dynamic Programming**: Value Iteration and Policy Iteration
 
-This project requires Python 3.8+ and pip.
+### Function Approximation
+- **Linear Q-Learning**: Q-learning with linear function approximation
+- **Deep Q-Network (DQN)**: Deep learning-based Q-learning
 
-Installation
+### Policy Gradient Methods
+- **PPO**: Proximal Policy Optimization for continuous and discrete action spaces
 
-Clone the repo:
+## Getting Started
 
-git clone [https://github.com/your_username/RL-Framework.git](https://github.com/your_username/RL-Framework.git)
-cd RL-Framework
+### Prerequisites
 
+```bash
+pip install gymnasium numpy matplotlib
+```
 
-Create a virtual environment (Recommended):
+### Basic Usage
 
-python -m venv venv
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+```python
+import gymnasium as gym
+from env import GridWorldEnv
 
+# Create environment
+env = GridWorldEnv()
 
-Install dependencies:
+# Reset environment
+state, info = env.reset()
 
-pip install -r requirements.txt
+# Take action
+next_state, reward, terminated, truncated, info = env.step(action)
+```
 
+### Training an Agent
 
-A minimal requirements.txt would look like this:
+```python
+from Agents.q_learning.q_learning import QLearningAgent
 
-numpy
-matplotlib
-gymnasium
-stable-baselines3[extra]
-tqdm
+# Initialize agent
+agent = QLearningAgent(env)
 
+# Train agent
+agent.train(num_episodes=1000)
 
-How to Run
+# Evaluate agent
+agent.evaluate(num_episodes=100)
+```
 
-You can run algorithms from any of the three main folders.
+## Notebooks
 
-1. Dynamic Programming (Model-Based)
+The `Notebooks/` directory contains Jupyter notebooks demonstrating:
+- Environment usage and visualization
+- Training different agents
+- Comparing algorithm performance
+- Hyperparameter tuning experiments
 
-These solvers compute the optimal policy directly by using the environment's transition model.
+## Contributing
 
-# Run Value Iteration
-python DP/value_iteration.py
+Contributions are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
 
-# Run Policy Iteration
-python DP/policy_iteration.py
+## License
 
+This project is open source and available under the MIT License.
 
-2. From-Scratch Agents (Model-Free)
+## Acknowledgments
 
-These agents learn the optimal policy by interacting with the environment over many episodes.
+- Gymnasium (OpenAI Gym) for the environment interface standards
+- Sutton & Barto's "Reinforcement Learning: An Introduction" for algorithm references
+- Stable-Baselines3 for baseline comparisons
 
-# Run Monte Carlo
-python Agents/monte_carlo/train.py
+## Contact
 
-# Run Q-Learning (example)
-python Agents/q_learning/train.py
-
-
-3. Stable Baselines 3 Examples
-
-These are high-performance implementations used for benchmarking.
-
-# Run PPO
-python stable_baseline3_exemples/train_ppo.py
-
-# Run A2C
-python stable_baseline3_exemples/train_a2c.py
+For questions or suggestions, please open an issue in the repository.
