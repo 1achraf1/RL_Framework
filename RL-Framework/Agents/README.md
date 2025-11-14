@@ -1,4 +1,4 @@
-#**Agents**
+# **Agents**
 <br>
 This directory contains implementations of various Reinforcement Learning agents, ranging from classical tabular methods to modern deep learning approaches.
 Overview
