@@ -1,4 +1,4 @@
-### Agents
+# Agents
 
 This directory contains implementations of various Reinforcement Learning agents, ranging from classical tabular methods to modern deep learning approaches.
 
@@ -6,11 +6,11 @@ All agents are designed to work with the custom Grid World environment and follo
 
 
 
-##🧠 Agent Implementations
+## 🧠 Agent Implementations
 
 A detailed look at the agents available in this repository.
 
-# Q-Learning (q_learning/)
+### Q-Learning (q_learning/)
 
 Classical Q-learning implementations for discrete state-action spaces.
 
