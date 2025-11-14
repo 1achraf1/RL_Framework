@@ -11,14 +11,14 @@ Files:
 q_learning.py - Standard tabular Q-learning with epsilon-greedy exploration
 linear_q.py - Q-learning with linear function approximation
 
-Features:
+**Features** :
 
 Epsilon-greedy exploration strategy
 Configurable learning rate and discount factor
 Support for decaying exploration
 Training and evaluation modes
 
-Usage:
+**Usage**:
 pythonfrom Agents.q_learning.q_learning import QLearningAgent
 
 agent = QLearningAgent(
@@ -41,7 +41,7 @@ Linear function approximation
 Suitable for larger state spaces
 Gradient-based updates
 
-Best for:
+**Best for**:
 
 Environments where tabular methods are impractical
 When you want interpretable feature weights
@@ -64,7 +64,7 @@ Separate target network updated periodically
 Adam optimizer for training
 Epsilon-greedy exploration
 
-Best for:
+**Best for**:
 
 Complex environments with large state spaces
 Problems requiring non-linear function approximation
@@ -80,14 +80,14 @@ Episode-based learning
 No bootstrapping (full returns)
 On-policy and off-policy variants
 
-Characteristics:
+**Characteristics**:
 
 Requires episodic tasks
 High variance, low bias
 Simple and intuitive
 No model required
 
-Best for:
+**Best for**:
 
 Episodic environments
 When you want unbiased estimates
@@ -103,14 +103,14 @@ Actor-critic architecture
 Generalized Advantage Estimation (GAE)
 Multiple epochs per batch
 
-Advantages:
+**Advantages**:
 
 State-of-the-art performance
 Stable and reliable training
 Works with continuous actions
 Sample efficient
 
-Best for:
+**Best for**:
 
 Complex control tasks
 When DQN struggles
@@ -118,7 +118,7 @@ Continuous action spaces
 Production-grade applications
 
 
-Comparison Guide
+**Comparison Guide**
 AgentState SpaceAction SpaceSample EfficiencyStabilityComplexityQ-LearningSmallDiscreteLowHighLowLinear QMediumDiscreteMediumHighLowDQNLargeDiscreteMediumMediumMediumMonte CarloSmall-MediumDiscreteLowMediumLowPPOAnyAnyHighHighHigh
 General Agent Interface
 Most agents follow this common interface:
@@ -211,12 +211,3 @@ References
 Sutton & Barto - "Reinforcement Learning: An Introduction"
 Mnih et al. - "Playing Atari with Deep Reinforcement Learning" (DQN)
 Schulman et al. - "Proximal Policy Optimization Algorithms" (PPO)
-
-Contributing
-When adding new agents:
-
-Follow the common interface pattern
-Include docstrings and type hints
-Add unit tests
-Update this README
-Provide usage examples
