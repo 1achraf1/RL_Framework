@@ -18,6 +18,7 @@ Tabular Q-Learning (q_learning.py)
 
 Standard tabular Q-learning with epsilon-greedy exploration.
 
+
 **Features:**
 
 Epsilon-greedy exploration strategy
@@ -28,24 +29,9 @@ Support for decaying exploration
 
 Training and evaluation modes
 
-Usage:
-
-from Agents.q_learning.q_learning import QLearningAgent
-
-# 'env' is the custom Grid World environment
-agent = QLearningAgent(
-    env=env,
-    learning_rate=0.1,
-    discount_factor=0.99,
-    epsilon=1.0,
-    epsilon_decay=0.995,
-    epsilon_min=0.01
-)
-
-agent.train(num_episodes=1000)
 
 
-Linear Q-Learning (linear_q.py)
+## Linear Q-Learning 
 
 Q-learning using linear function approximation for state-value estimation.
 
@@ -67,7 +53,7 @@ When you want interpretable feature weights
 
 Bridging tabular and deep learning methods
 
-2. Deep Q-Network (DQN) (dqn/)
+## Deep Q-Network (DQN) (dqn/)
 
 Deep learning-based Q-learning using a neural network to approximate the Q-value function.
 
@@ -97,7 +83,8 @@ Problems requiring non-linear function approximation
 
 When feature engineering is difficult
 
-3. Monte Carlo Methods (monte_carlo/)
+
+## Monte Carlo Methods (monte_carlo/)
 
 Episode-based learning methods that learn from complete returns.
 
@@ -127,7 +114,7 @@ When you want unbiased estimates
 
 Exploring alternatives to temporal difference learning
 
-4. Proximal Policy Optimization (PPO) (ppo/)
+## Proximal Policy Optimization (PPO) (ppo/)
 
 A modern, state-of-the-art policy gradient method known for its stability and sample efficiency.
 
